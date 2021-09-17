@@ -18,7 +18,7 @@ defmodule ExLoggerMock.Backend do
   ```
   """
   @spec init({ExLoggerMock.Backend, binary()}) :: {:ok, %{name: binary()}}
-  @doc "intialise from configuration, but we have no config"
+  @doc "initialise from configuration, but we have no config"
   def init({__MODULE__, name}) do
     {:ok,
      %{

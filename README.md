@@ -1,10 +1,16 @@
 # ExLoggerMock
 
+[![Module Version](https://img.shields.io/hexpm/v/ex_logger_mock.svg)](https://hex.pm/packages/ex_logger_mock)
+[![Hex Docs](https://img.shields.io/badge/hex-docs-lightgreen.svg)](https://hexdocs.pm/ex_logger_mock/)
+[![Total Download](https://img.shields.io/hexpm/dt/ex_logger_mock.svg)](https://hex.pm/packages/ex_logger_mock)
+[![License](https://img.shields.io/hexpm/l/ex_logger_mock.svg)](https://github.com/blake-education/ex_logger_mock/blob/master/LICENSE.md)
+[![Last Updated](https://img.shields.io/github/last-commit/blake-education/ex_logger_mock.svg)](https://github.com/blake-education/ex_logger_mock/commits/master)
+
 A mock logging backend for Elixir unit tests. A clean way to get rid of log output in the test run.
 
 ## Installation
 
-The package can be installed by adding `ex_logger_mock` to the list of dependencies in `mix.exs`:
+The package can be installed by adding `:ex_logger_mock` to the list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
@@ -94,6 +100,9 @@ mix coveralls && \
 mix credo --strict
 ```
 
-## License
+## Copyright and License
 
-MIT - do what you want with it.
+Copyright (c) 2019 Lucas Nelson
+
+This work is free. You can redistribute it and/or modify it under the
+terms of the MIT License. See the [LICENSE.md](./LICENSE.md) file for more details.

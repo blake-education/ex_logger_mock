@@ -1,23 +1,21 @@
 defmodule ExLoggerMock.MixProject do
-  @moduledoc "setup the project"
-
   use Mix.Project
+
+  @source_url "https://github.com/blake-education/ex_logger_mock"
+  @version "1.2.0"
 
   def project do
     [
       app: :ex_logger_mock,
+      name: "ExLoggerMock",
+      version: @version,
+      elixir: "~> 1.10",
+      package: package(),
       deps: deps(),
       docs: docs(),
-      description: "A mock logging backend for Elixir unit tests",
-      elixir: "~> 1.10",
-      homepage_url: "https://github.com/blake-education/ex_logger_mock",
-      name: "ExLoggerMock",
-      package: package(),
       preferred_cli_env: preferred_cli_env(),
-      source_url: "https://github.com/blake-education/ex_logger_mock",
       start_permanent: Mix.env() == :prod,
       test_coverage: [tool: ExCoveralls],
-      version: "1.2.0"
     ]
   end
 
@@ -25,7 +23,7 @@ defmodule ExLoggerMock.MixProject do
     [
       {:credo, "~> 1.2", only: :test, runtime: false},
       {:dialyxir, "~> 0.5.1", only: :test, runtime: false},
-      {:ex_doc, "~> 0.21.3", only: :dev, runtime: false},
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
       {:excoveralls, "~> 0.12.2", only: :test, runtime: false},
       {:mix_test_watch, "~> 1.0", only: :test, runtime: false}
     ]
@@ -33,15 +31,24 @@ defmodule ExLoggerMock.MixProject do
 
   defp docs do
     [
-      main: "ExLoggerMock.Backend"
+      extras: [
+        "README.md": [title: "Overview"]
+      ],
+      main: "readme",
+      homepage_url: @source_url,
+      source_url: @source_url,
+      source_ref: "v#{@version}"
     ]
   end
 
   defp package do
     [
+      name: "ex_logger_mock",
+      description: "A mock logging backend for Elixir unit tests",
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/blake-education/ex_logger_mock"},
-      name: "ex_logger_mock"
+      links: %{
+        "GitHub" => @source_url
+      }
     ]
   end
 
