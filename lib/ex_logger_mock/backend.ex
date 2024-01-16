@@ -101,5 +101,6 @@ defmodule ExLoggerMock.Backend do
   defp application_in_reject?(_, _), do: false
 
   defp message_in_reject?(_message, %{message_reject: nil}), do: false
+  defp message_in_reject?(message, %{message_reject: %Regex{} = pattern}), do: Regex.match?(pattern, message)
   defp message_in_reject?(message, %{message_reject: callback}), do: callback.(message)
 end
