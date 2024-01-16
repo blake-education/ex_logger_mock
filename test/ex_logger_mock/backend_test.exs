@@ -26,7 +26,14 @@ defmodule ExLoggerMock.BackendTest do
     name: "ex_logger_mock"
   }
 
-  defp state_with_message_reject do
+  @state_with_message_reject_pattern %{
+    application_filter: [],
+    application_reject: [:reject_app],
+    message_reject: ~r{ignore this},
+    name: "ex_logger_mock"
+  }
+
+  defp state_with_message_reject_callback do
     %{
       application_filter: [],
       application_reject: [],
@@ -110,10 +117,23 @@ defmodule ExLoggerMock.BackendTest do
       refute_receive {:ex_logger_mock, _}
     end
 
+    test "ignores message that match message rejection pattern" do
+      pid = self()
+      metadata = [application: :other_app, pid: pid]
+      state = @state_with_message_reject_pattern
+
+      assert Backend.handle_event(
+               {:info, pid, {Logger, "ignore this", @timestamp, metadata}},
+               state
+             ) == {:ok, state}
+
+      refute_receive {:ex_logger_mock, {:info, "ignore this", @timestamp, ^metadata}}
+    end
+
     test "ignores message that match message rejection filter" do
       pid = self()
       metadata = [application: :other_app, pid: pid]
-      state = state_with_message_reject()
+      state = state_with_message_reject_callback()
 
       assert Backend.handle_event(
                {:info, pid, {Logger, "ignore this", @timestamp, metadata}},
